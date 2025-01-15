@@ -65,7 +65,10 @@ const Nav = () => {
 
                 <Link to="/about-user">
                   {" "}
-                  <p> {auth?.fullName} </p>
+                  <p className="uppercase  text-orange-200">
+                    {" "}
+                    {auth?.fullName}{" "}
+                  </p>
                 </Link>
               </div>
 

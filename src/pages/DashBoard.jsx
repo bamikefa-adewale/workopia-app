@@ -11,6 +11,7 @@ const DashBoard = () => {
       {" "}
       <Showcase />
       <TopBanner />
+      {/* Display of all Jobs */}
       <JobListings />
       <BottomBanner />
     </div>

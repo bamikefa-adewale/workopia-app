@@ -1,13 +1,25 @@
-import { useMutation } from "@tanstack/react-query";
-import { supabase } from "../componenets/supabaseClient";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { deleteJob } from "../Service/Auth";
+import { toast } from "react-toastify";
 
 export const useDeleteForm = () => {
-  const { mutate } = useMutation(async (id) => {
-    const { error } = await supabase.from("jobLists").delete().eq("id", id);
-    if (error) {
-      throw new Error(error.message);
-    }
+  // Access the client
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (id) => deleteJob(id),
+    onSuccess: (data) => {
+      if (data.success) {
+        toast.success(data?.message);
+        queryClient.invalidateQueries({ queryKey: ["jobLists"] });
+        return navigate("/");
+      }
+    },
   });
 
-  return mutate;
+  return {
+    mutate,
+    deleteJobLoader: isPending,
+  };
 };

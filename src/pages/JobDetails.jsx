@@ -1,26 +1,19 @@
-/* eslint-disable no-undef */
 import { Link } from "react-router-dom";
 import { FaCircleArrowLeft } from "react-icons/fa6";
 import BottomBanner from "../componenets/BottomBanner";
-import { useGetJob } from "../hooks/useGetJobs";
+
 import { useDeleteForm } from "../hooks/useDeleteForm";
+import { useGetJob } from "../hooks/useGetJob";
 
 const JobDetails = () => {
   const { data: job, isPending, error } = useGetJob();
-
-  const { mutate } = useDeleteForm();
-  const { data, id } = useGetJob();
-
-  console.log(data);
+  const { mutate, deleteJobLoader } = useDeleteForm();
 
   if (!job && !isPending && !error)
     return (
       <div className="text-red-400 justify-between flex">No job found.</div>
     );
 
-  const handleDelete = (id) => {
-    mutate(id);
-  };
   return (
     <div className="bg-gray-100">
       <section className="container mx-auto p-4 mt-4">
@@ -31,17 +24,18 @@ const JobDetails = () => {
             </Link>
             <div className="flex space-x-4 ml-4">
               <Link
-                to={`/post-edit/${id}`}
+                to={`/post-edit/${job?.id}`}
                 state={{ job }} // Pass the full job object
                 className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
               >
                 Edit
               </Link>
               <button
-                onClick={handleDelete}
+                onClick={() => mutate(job?.id)}
                 className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded"
+                disabled={deleteJobLoader}
               >
-                Delete
+                {deleteJobLoader ? "Deleting..." : "Delete"}
               </button>
             </div>
           </div>

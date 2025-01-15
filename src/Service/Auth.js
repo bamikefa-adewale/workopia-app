@@ -80,3 +80,15 @@ export const LogOutCurrentUser = async () => {
     logout: true,
   };
 };
+
+export const deleteJob = async (id) => {
+  if (!id) return null;
+  const { error } = await supabase.from("jobLists").delete().eq("id", id);
+  if (error) {
+    return toast.error(error.message);
+  }
+  return {
+    success: true,
+    message: "Delete Job Successfully",
+  };
+};
