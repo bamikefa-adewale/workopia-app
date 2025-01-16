@@ -1,14 +1,40 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { useGetJobs } from "../hooks/useGetJobs";
 import JobCard from "./JobCard";
 
-const JobListings = () => {
+const JobListings = ({ searchQuery }) => {
   const { data: jobs, isPending, error } = useGetJobs();
-  const [visibleJobs, setVisibleJobs] = useState(6); // Initialize with 6 jobs
+  const [visibleJobs, setVisibleJobs] = useState(6);
+  const [filteredJob, setFilteredJob] = useState([]);
+
+  useEffect(() => {
+    console.log("Jobs data received:", jobs);
+    console.log("Search query:", searchQuery);
+
+    if (jobs) {
+      const filtered = jobs.filter((job) => {
+        const matchesKeyword = searchQuery.keywords
+          ? (job?.jobTile || "")
+              .toLowerCase()
+              .include(searchQuery.keywords.toLowerCase())
+          : true;
+        const matcheslocation = searchQuery.location
+          ? (job?.address || "")
+              .toLowerCase()
+              .include(searchQuery.location.toLowerCase())
+          : true;
+        return matchesKeyword && matcheslocation;
+      });
+      setFilteredJob(filtered);
+    }
+  }, [jobs, searchQuery]);
+
+  console.log(jobs);
 
   const handleShowAll = () => {
-    setVisibleJobs(jobs.length); // Show all jobs
+    setVisibleJobs(filteredJob.length); // Show all jobs
   };
 
   return (
@@ -25,17 +51,17 @@ const JobListings = () => {
         {error && (
           <div className="text-red-700">Error message: {error.message}</div>
         )}
-        {!isPending && !error && jobs.length === 0 && (
+        {!isPending && !error && filteredJob.length === 0 && (
           <div className="text-red-700">No jobs available...</div>
         )}
-        {!isPending && !error && jobs.length > 0 && (
+        {!isPending && !error && filteredJob.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            {jobs.slice(0, visibleJobs).map((job) => (
+            {filteredJob.slice(0, visibleJobs).map((job) => (
               <JobCard key={job.id} {...job} />
             ))}
           </div>
         )}
-        {!error && visibleJobs < jobs?.length && (
+        {!error && visibleJobs < filteredJob?.length && (
           <div className="items-center flex justify-center">
             <button
               onClick={handleShowAll}

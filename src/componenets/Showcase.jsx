@@ -1,11 +1,27 @@
+/* eslint-disable react/prop-types */
 import { VscSearch } from "react-icons/vsc";
 import showcase from "../assets/showcase.jpg";
 import CustomInput from "./ui/CustomInput";
+import { useState } from "react";
 
-const Showcase = () => {
-  const handleSearch = (e) => {
+const Showcase = ({onSearch}) => {
+  const [searchQuery, setSearchQuery] = useState({
+    keywords: "",
+    location: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    console.log(value);
+
+    setSearchQuery((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // Additional search logic can go here if needed
+    console.log("Search updated:", searchQuery);
+
+    onSearch(searchQuery);
   };
 
   return (
@@ -24,16 +40,18 @@ const Showcase = () => {
           Find Your Dream Job
         </h2>
         <form
-          onSubmit={handleSearch}
+          onSubmit={handleSubmit}
           className="flex flex-wrap justify-center items-center gap-2"
         >
           <label htmlFor="keywords" className="sr-only">
-            Keywords
+            keywords
           </label>
           <CustomInput
             id="keywords"
             type="text"
-            placeholder="Keywords"
+            value={searchQuery.keywords}
+            onChange={handleInputChange}
+            placeholder="keywords"
             className="w-full md:w-auto px-4 py-2 rounded focus:outline-none"
           />
           <label htmlFor="location" className="sr-only">
@@ -42,6 +60,8 @@ const Showcase = () => {
           <CustomInput
             id="location"
             type="text"
+            value={searchQuery.location}
+            onChange={handleInputChange}
             placeholder="Location"
             className="w-full md:w-auto px-4 py-2 rounded focus:outline-none"
           />
