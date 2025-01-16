@@ -41,6 +41,9 @@ const JobListings = ({ searchQuery }) => {
         <div className="text-center text-3xl mb-4 font-bold border border-gray-300 p-3">
           <h1> Recent Jobs</h1>
         </div>
+        <h1 className="text-blue-600 text-lg  p-2 my-2">
+          Available Job : {filteredJob.length}
+        </h1>
         {isPending && (
           <h1 className="text-blue-700 text-lg flex justify-center font-semibold">
             Loading...
