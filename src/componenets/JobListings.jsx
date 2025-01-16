@@ -1,5 +1,5 @@
-/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
+
 import { useEffect, useState } from "react";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { useGetJobs } from "../hooks/useGetJobs";
@@ -11,17 +11,22 @@ const JobListings = ({ searchQuery }) => {
   const [filteredJob, setFilteredJob] = useState([]);
 
   useEffect(() => {
-    console.log("checking if job aval:", jobs);
+    console.log("Jobs data received:", jobs);
 
     if (jobs) {
       const filtered = jobs.filter((job) => {
         const matchesKeyword = searchQuery.keywords
-          ? job?.jobTitle.toLowerCase().includes(searchQuery.keywords)
+          ? job?.jobTitle
+              ?.toLowerCase()
+              .includes(searchQuery.keywords.toLowerCase())
           : true;
-
-        return matchesKeyword;
+        const matchesLocation = searchQuery.location
+          ? job?.address
+              ?.toLowerCase()
+              .includes(searchQuery.location.toLowerCase())
+          : true;
+        return matchesKeyword && matchesLocation;
       });
-
       setFilteredJob(filtered);
     }
   }, [jobs, searchQuery]);
