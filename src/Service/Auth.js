@@ -81,6 +81,7 @@ export const LogOutCurrentUser = async () => {
   };
 };
 
+// delete a job api
 export const deleteJob = async (id) => {
   if (!id) return null;
   const { error } = await supabase.from("jobLists").delete().eq("id", id);

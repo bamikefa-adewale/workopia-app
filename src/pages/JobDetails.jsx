@@ -1,18 +1,25 @@
-import { Link } from "react-router-dom";
 import { FaCircleArrowLeft } from "react-icons/fa6";
 import BottomBanner from "../componenets/BottomBanner";
 
 import { useDeleteForm } from "../hooks/useDeleteForm";
 import { useGetJob } from "../hooks/useGetJob";
+import { useCurrentUser } from "../hooks/useCurrentUser";
+import { Link } from "react-router-dom";
 
 const JobDetails = () => {
+  const { user } = useCurrentUser();
+  console.log("current userID :", user);
+
   const { data: job, isPending, error } = useGetJob();
   const { mutate, deleteJobLoader } = useDeleteForm();
+  console.log("current postID :", job?.user_id);
 
   if (!job && !isPending && !error)
     return (
       <div className="text-red-400 justify-between flex">No job found.</div>
     );
+
+  const isJobOwner = user?.id === job?.user_id;
 
   return (
     <div className="bg-gray-100">
@@ -22,22 +29,24 @@ const JobDetails = () => {
             <Link to="/" className="p-4 text-blue-700 flex items-center gap-2">
               <FaCircleArrowLeft /> Back To Home
             </Link>
-            <div className="flex space-x-4 ml-4">
-              <Link
-                to={`/post-edit/${job?.id}`}
-                state={{ job }} // Pass the full job object
-                className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
-              >
-                Edit
-              </Link>
-              <button
-                onClick={() => mutate(job?.id)}
-                className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded"
-                disabled={deleteJobLoader}
-              >
-                {deleteJobLoader ? "Deleting..." : "Delete"}
-              </button>
-            </div>
+            {isJobOwner && (
+              <div className="flex space-x-4 ml-4">
+                <Link
+                  to={`/post-edit/${job?.id}`}
+                  state={{ job }} // Pass the full job object
+                  className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
+                >
+                  Edit
+                </Link>
+                <button
+                  onClick={() => mutate(job?.id)}
+                  className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded"
+                  disabled={deleteJobLoader}
+                >
+                  {deleteJobLoader ? "Deleting..." : "Delete"}
+                </button>
+              </div>
+            )}
           </div>
 
           <h1 className="text-3xl font-bold mb-4">{job?.jobTitle}</h1>
