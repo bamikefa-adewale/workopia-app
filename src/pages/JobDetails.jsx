@@ -5,21 +5,22 @@ import { useDeleteForm } from "../hooks/useDeleteForm";
 import { useGetJob } from "../hooks/useGetJob";
 import { useCurrentUser } from "../hooks/useCurrentUser";
 import { Link } from "react-router-dom";
+import { ApplyJobModal } from "../componenets/ui/ModalComponent/ApplyJobModal";
 
 const JobDetails = () => {
   const { user } = useCurrentUser();
-  console.log("current userID :", user);
-
   const { data: job, isPending, error } = useGetJob();
   const { mutate, deleteJobLoader } = useDeleteForm();
-  console.log("current postID :", job?.user_id);
 
   if (!job && !isPending && !error)
     return (
       <div className="text-red-400 justify-between flex">No job found.</div>
     );
+  console.log("Current user ID:", user?.id);
+  console.log("Job creator user ID:", job?.user_id);
 
-  const isJobOwner = user?.id === job?.user_id;
+  const isJobOwner = Boolean(user?.id === job?.user_id);
+  console.log("Is Job Owner:", isJobOwner);
 
   return (
     <div className="bg-gray-100">
@@ -95,18 +96,17 @@ const JobDetails = () => {
         </p>
         {!isJobOwner && (
           <button
-            href="mailto:manager@company.com"
             disabled={isPending}
             className="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium cursor-pointer text-indigo-700 bg-indigo-100 hover:bg-indigo-200"
           >
             {isPending ? "Applying..." : " Apply Now"}
           </button>
         )}
+        <ApplyJobModal isPending={isPending} />
       </section>
 
       <BottomBanner />
     </div>
   );
 };
-
 export default JobDetails;

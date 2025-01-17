@@ -90,6 +90,7 @@ const JobPost = () => {
           <div className="mb-4">
             <CustomSelect
               label="Job Type" //new added
+              type="text"
               options={[
                 { value: "full-time", label: "Full-Time" },
                 { value: "part-time", label: "Part-Time" },
@@ -227,7 +228,7 @@ const JobPost = () => {
           </div> */}
 
           <button
-          disabled={isPending}
+            disabled={isPending}
             type="submit"
             className="w-full bg-green-500 hover:bg-green-600
                text-white px-4 py-2 my-3 rounded focus:outline-none"

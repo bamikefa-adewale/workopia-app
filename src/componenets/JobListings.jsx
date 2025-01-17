@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { useGetJobs } from "../hooks/useGetJobs";
 import JobCard from "./JobCard";
+import { Button } from "@material-tailwind/react";
 
 const JobListings = ({ searchQuery }) => {
   const { data: jobs, isPending, error } = useGetJobs();
@@ -41,14 +42,17 @@ const JobListings = ({ searchQuery }) => {
         <div className="text-center text-3xl mb-4 font-bold border border-gray-300 p-3">
           <h1> Recent Jobs</h1>
         </div>
-        <h1 className="text-blue-600 text-lg  p-2 my-2">
-          Available Job : {filteredJob.length}
+        <h1 className=" text-lg lex flex gap-8 items-center p-2 my-2">
+          Available Job:
+          <Button className="text-white bg-blue-500">
+            {" "}
+            {filteredJob.length}
+          </Button>
         </h1>
         {isPending && (
-          <h1 className="text-blue-700 text-lg flex justify-center font-semibold">
-            Loading...
-          </h1>
+          <h1 className="w-20 h-20 border-8 border-gray-200 border-t-8 border-t-blue-500 rounded-full animate-spin duration-2000"></h1>
         )}
+
         {error && (
           <div className="text-red-700">Error message: {error.message}</div>
         )}

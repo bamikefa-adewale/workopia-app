@@ -19,7 +19,7 @@ export const signUpApi = async (value) => {
       .insert([{ email, ...profileDetails }])
       .select()
       .single();
-    console.log(value);
+    console.log("Register successfull", value);
     if (profileError) {
       return toast.error(profileError.message);
     }
