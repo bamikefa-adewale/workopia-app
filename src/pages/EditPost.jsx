@@ -240,7 +240,6 @@ const EditPost = () => {
           </form>
         </div>
       </section>
-      );
     </div>
   );
 };

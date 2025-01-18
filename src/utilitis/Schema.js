@@ -31,5 +31,14 @@ export const JobListSchema = z.object({
   state: z.string().min(1, "Cannot be Empty"),
   number: z.string().min(1, "Phone Number Cannot be Empty"),
   emailAddress: z.string().min(1, "Email Address Cannot be Empty"),
-  // jobFile: z.string().min(1, "Upload your profile "),
+  // jobFile: z.any().refine((file) => file?.length > 0, "CV is required"),
+});
+
+export const ApplyJobSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  proposalDetails: z
+    .string()
+    .min(10, "Proposal must be at least 10 characters long"),
+  uploadcv: z.any().refine((file) => file?.length > 0, "CV is required"),
 });
