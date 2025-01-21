@@ -12,7 +12,7 @@ import HeadingSkeleton from "../componenets/ui/HeadingSkeleton";
 const JobDetails = () => {
   const { user } = useCurrentUser();
   const { data: job, isPending, error } = useGetJob();
-  const { mutate, deleteJobLoader } = useDeleteForm();
+  const { mutate: deleteUser, deleteJobLoader } = useDeleteForm();
 
   if (!job && !isPending && !error)
     return (
@@ -48,7 +48,7 @@ const JobDetails = () => {
                     Edit
                   </Link>
                   <button
-                    onClick={() => mutate(job?.id)}
+                    onClick={() => deleteUser(job?.id)}
                     className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded"
                     disabled={deleteJobLoader}
                   >

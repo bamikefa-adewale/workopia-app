@@ -1,8 +1,9 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CustomInput from "../componenets/ui/CustomInput";
 import CustomSelect from "../componenets/ui/CustomSelect";
 import CustomTextArea from "../componenets/ui/CustomTextArea";
 import { useEditForm } from "../hooks/useEditForm";
+import { FaCircleArrowLeft } from "react-icons/fa6";
 
 const EditPost = () => {
   const location = useLocation();
@@ -11,7 +12,10 @@ const EditPost = () => {
     useEditForm(job);
 
   return (
-    <div>
+    <div className="block items-center p-5">
+      <Link to="/" className=" text-blue-700 flex items-center gap-2">
+        <FaCircleArrowLeft /> Back To Home
+      </Link>
       <section className="flex justify-center items-center ">
         <div className="bg-white p-5 rounded-lg shadow-md  w-[70%] md:w-[40%] mx-6">
           <h2 className="text-4xl text-center font-bold mb-4">
