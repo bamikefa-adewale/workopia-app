@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const BottomBanner = () => (
   <section className="container mx-auto my-4">
-    <div className="bg-blue-800 text-white rounded p-4 flex items-center justify-between">
+    <div className="bg-blue-800 text-white rounded px-1 py-4 flex items-center gap-20 justify-between">
       <div>
         <h2 className="text-xl font-semibold">Looking to hire?</h2>
-        <p className="text-gray-200 text-lg mt-2">
+        <p className="text-gray-200 md:text-lg font-normal sm:text-xs mt-2">
           Post your job listing now and find the perfect candidate.
         </p>
       </div>

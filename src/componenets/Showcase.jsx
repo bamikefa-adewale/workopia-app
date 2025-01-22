@@ -4,7 +4,7 @@ import showcase from "../assets/showcase.jpg";
 import CustomInput from "./ui/CustomInput";
 import { useState } from "react";
 
-const Showcase = ({onSearch}) => {
+const Showcase = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState({
     keywords: "",
     location: "",
@@ -65,7 +65,7 @@ const Showcase = ({onSearch}) => {
             placeholder="Location"
             className="w-full md:w-auto px-4 py-2 rounded focus:outline-none"
           />
-          <button className="flex gap-2 items-center bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none">
+          <button className="flex gap-2 text-center justify-center items-center w-full lg:w-32 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none">
             <VscSearch /> Search
           </button>
         </form>

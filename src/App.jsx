@@ -1,4 +1,3 @@
-import Nav from "./componenets/Nav";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -7,9 +6,9 @@ import DashBoard from "./pages/DashBoard";
 import JobDetails from "./pages/JobDetails";
 import AboutUser from "./pages/AboutUser";
 import EditPost from "./pages/EditPost";
+import Nav from "./componenets/Nav";
 
 function App() {
- 
   return (
     <Router>
       <Nav />

@@ -1,6 +1,5 @@
 import { FaCircleArrowLeft } from "react-icons/fa6";
 import BottomBanner from "../componenets/BottomBanner";
-
 import { useDeleteForm } from "../hooks/useDeleteForm";
 import { useGetJob } from "../hooks/useGetJob";
 import { useCurrentUser } from "../hooks/useCurrentUser";
@@ -18,8 +17,6 @@ const JobDetails = () => {
     return (
       <div className="text-red-400 justify-between flex">No job found.</div>
     );
-  console.log("Current user ID:", user?.id);
-  console.log("Job creator user ID:", job?.user_id);
 
   const isJobOwner = Boolean(user?.id === job?.user_id);
   console.log("Is Job Owner:", isJobOwner);

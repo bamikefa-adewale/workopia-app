@@ -17,7 +17,6 @@ const DashBoard = () => {
   useCurrentUser();
   return (
     <div>
-      {" "}
       <Showcase onSearch={handleSearch} />
       <TopBanner />
       {/* Display of all Jobs */}

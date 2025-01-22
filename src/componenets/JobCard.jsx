@@ -9,7 +9,6 @@ const JobCard = ({
   address,
   remote,
   tags,
-  tagType,
   created_at,
   id,
 }) => {
@@ -28,14 +27,19 @@ const JobCard = ({
           </li>
           <li className="mb-2 flex ">
             <strong>Location:</strong> {address}
+          </li>
+          <li className="mb-2 flex ">
+            <strong>Remote:</strong>
             <span
-              className={`text-xs ${tagType} text-white text-center uppercase bg-blue-500 w-[10%] rounded-full px-2 py-1 ml-2`}
+              className={`text-xs text-white text-center uppercase bg-blue-500 w-[10%] rounded-full px-2 py-1 ml-2`}
             >
               {remote}
             </span>
           </li>
           <li className="mb-2 ">
             <strong>Tags:</strong> {tags}
+          </li>
+          <li className="mb-2 ">
             <p> Posted At : {formattedDate}</p>
           </li>
         </ul>

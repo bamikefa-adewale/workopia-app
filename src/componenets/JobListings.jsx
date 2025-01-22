@@ -15,8 +15,6 @@ const JobListings = ({ searchQuery }) => {
   const [filteredJob, setFilteredJob] = useState([]);
 
   useEffect(() => {
-    console.log("Jobs data received:", jobs);
-
     if (jobs) {
       const filtered = jobs?.filter((job) => {
         const matchesKeyword = searchQuery?.keywords

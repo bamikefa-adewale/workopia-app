@@ -9,7 +9,7 @@ const JobPost = () => {
 
   return (
     <section className="flex justify-center items-center ">
-      <div className="bg-white p-5 rounded-lg shadow-md  w-[70%] md:w-[40%] mx-6">
+      <div className="bg-white my-10  p-5 rounded-lg shadow-md  w-full md:w-[40%]">
         <h2 className="text-4xl text-center font-bold mb-4">
           Create Job Listing
         </h2>
