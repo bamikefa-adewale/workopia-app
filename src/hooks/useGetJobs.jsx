@@ -3,7 +3,7 @@ import { getJobs } from "../Service/getJobs";
 
 
 export const useGetJobs = () => {
-  const { isPending, data, error } = useQuery({
+  const { isPending, data, error } = useQuery({                
     queryKey: ["jobLists"],
     queryFn: getJobs,
   });

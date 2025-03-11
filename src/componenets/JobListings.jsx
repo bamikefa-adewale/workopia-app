@@ -13,6 +13,7 @@ const JobListings = ({ searchQuery }) => {
   const { data: jobs, isPending, error } = useGetJobs();
   const [visibleJobs, setVisibleJobs] = useState(6);
   const [filteredJob, setFilteredJob] = useState([]);
+console.log(jobs);
 
   useEffect(() => {
     if (jobs) {
@@ -77,6 +78,9 @@ const JobListings = ({ searchQuery }) => {
             ))}
           </div>
         )}
+
+
+
         {!error && visibleJobs < filteredJob?.length && (
           <div className="items-center mt-3 flex justify-center">
             {isPending ? (
