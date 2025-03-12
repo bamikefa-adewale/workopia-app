@@ -8,7 +8,7 @@ export const getJobs = async () => {
     .order("created_at", { ascending: false });
 
   if (error) {
-    console.error("Error fetching jobs:", error.message);
+    toast.error("Error fetching jobs:", error.message);
     return [];
   }
 

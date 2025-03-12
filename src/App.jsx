@@ -1,47 +1,33 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext";
-import Nav from "./componenets/Nav";
-import DashBoard from "./pages/DashBoard";
-import JobPost from "./pages/JobPost";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import AboutUser from "./pages/AboutUser";
+import JobPost from "./pages/JobPost";
+import DashBoard from "./pages/DashBoard";
 import JobDetails from "./pages/JobDetails";
+import AboutUser from "./pages/AboutUser";
 import EditPost from "./pages/EditPost";
+import Nav from "./componenets/Nav";
 import ProtectedRoute from "./Service/ProtectedRoute";
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Nav />
-        <Routes>
-          <Route path="/" element={<DashBoard />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="about-user" element={<AboutUser />} />
-          <Route path="/job/:id" element={<JobDetails />} />
+    <Router>
+      <Nav />
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<DashBoard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-          {/* Protected Routes */}
-          <Route
-            path="/job-post"
-            element={
-              <ProtectedRoute>
-                <JobPost />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/post-edit/:id"
-            element={
-              <ProtectedRoute>
-                <EditPost />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </Router>
-    </AuthProvider>
+        {/* Protected Routes */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/about-user" element={<AboutUser />} />
+          <Route path="/job-post" element={<JobPost />} />
+          <Route path="/post-edit/:id" element={<EditPost />} />
+          <Route path="/job/:id" element={<JobDetails />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 

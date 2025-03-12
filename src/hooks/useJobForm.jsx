@@ -4,6 +4,7 @@ import { supabase } from "../componenets/supabaseClient";
 import { useForm } from "react-hook-form";
 import { JobListSchema } from "../utilitis/Schema";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 export const useJobForm = () => {
   const navigate = useNavigate();
@@ -15,21 +16,19 @@ export const useJobForm = () => {
   } = useForm({
     resolver: zodResolver(JobListSchema),
   });
-  console.log(errors);
 
   const { isPending, mutate } = useMutation({
     mutationFn: async (data) => {
       const { error } = await supabase.from("jobLists").insert([data]);
       if (error) throw new Error(error.message);
-      console.log("FormData:", data);
       return data;
     },
     onSuccess: (data) => {
-      console.log("Job created successfully:", data);
+      toast.success("Job created successfully:", data);
       navigate("/");
     },
     onError: (error) => {
-      console.error("Error saving job:", error.message);
+      toast.error("Error saving job:", error.message);
     },
   });
 

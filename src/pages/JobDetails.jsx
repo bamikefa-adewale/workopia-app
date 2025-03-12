@@ -4,6 +4,7 @@ import { useDeleteForm } from "../hooks/useDeleteForm";
 import { useGetJob } from "../hooks/useGetJob";
 import { useCurrentUser } from "../hooks/useCurrentUser";
 import { Link } from "react-router-dom";
+import { ApplyJobModal } from "../componenets/ui/ModalComponent/ApplyJobModal";
 import JobCardSkeleton from "../componenets/ui/JobCardSkeleton";
 import HeadingSkeleton from "../componenets/ui/HeadingSkeleton";
 
@@ -113,14 +114,15 @@ const JobDetails = () => {
               Put Job Application as the subject of your email and attach your
               resume.
             </p>
-            {!isJobOwner && (
+            {/* {!isJobOwner && (
               <button
                 disabled={isPending}
                 className="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium cursor-pointer text-indigo-700 bg-indigo-100 hover:bg-indigo-200"
               >
                 {isPending ? "Applying..." : " Apply Now"}
               </button>
-            )}
+            )} */}
+            {!isJobOwner && <ApplyJobModal isPending={isPending} />}
           </div>
         )}
       </section>

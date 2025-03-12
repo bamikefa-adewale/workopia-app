@@ -1,21 +1,15 @@
+
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { Navigate } from "react-router-dom";
 
-// eslint-disable-next-line react/prop-types
-const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+const ProtectedRoute = () => {
+  const { auth, loading } = useAuth();
 
-  if (loading)
-    return (
-      <p
-        className="text-center items-center text-blue-700
-      justify-center "
-      >
-        Loading...
-      </p>
-    );
+  if (loading) {
+    return <p className="text-center text-blue-700">Loading...</p>;
+  }
 
-  return user ? children : <Navigate to="/login" replace />;
+  return auth ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoute;

@@ -12,14 +12,12 @@ const Showcase = ({ onSearch }) => {
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-    console.log(value);
 
     setSearchQuery((prev) => ({ ...prev, [id]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Search updated:", searchQuery);
 
     onSearch(searchQuery);
   };
