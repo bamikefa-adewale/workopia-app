@@ -4,7 +4,6 @@ import { useDeleteForm } from "../hooks/useDeleteForm";
 import { useGetJob } from "../hooks/useGetJob";
 import { useCurrentUser } from "../hooks/useCurrentUser";
 import { Link } from "react-router-dom";
-import { ApplyJobModal } from "../componenets/ui/ModalComponent/ApplyJobModal";
 import JobCardSkeleton from "../componenets/ui/JobCardSkeleton";
 import HeadingSkeleton from "../componenets/ui/HeadingSkeleton";
 
@@ -122,7 +121,6 @@ const JobDetails = () => {
                 {isPending ? "Applying..." : " Apply Now"}
               </button>
             )}
-            <ApplyJobModal isPending={isPending} />
           </div>
         )}
       </section>

@@ -1,4 +1,3 @@
-import React from "react";
 import { CustomProfileDetails2 } from "./CustomProfileDetails2";
 
 const CustomProfileDetails = () => {
