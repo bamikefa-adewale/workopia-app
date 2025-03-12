@@ -5,11 +5,13 @@ export const getJobs = async () => {
   const { data, error } = await supabase
     .from("jobLists")
     .select("*")
-    .range(0, 9)
-    .order("created_at", {
-      ascending: false,
-    });
-  if (error) return toast.error(error.message);
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching jobs:", error.message);
+    return [];
+  }
+
   return data;
 };
 

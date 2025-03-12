@@ -11,7 +11,7 @@ export const useLogOut = () => {
     mutationFn: LogOutCurrentUser,
     onSuccess: (data) => {
       if (data?.logout) {
-        toast.success(data?.message);
+        toast.error(data?.message);
 
         setAuth(null);
         localStorage.clear();

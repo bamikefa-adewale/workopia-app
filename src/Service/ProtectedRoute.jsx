@@ -1,19 +1,21 @@
-// import React from "react";
-// import { useAuth } from "../contexts/AuthContext";
-// import { Navigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import { Navigate } from "react-router-dom";
 
-// const ProtectedRoute = ({ children }) => {
-//   const { isAuthenticated } = useAuth();
+// eslint-disable-next-line react/prop-types
+const ProtectedRoute = ({ children }) => {
+  const { user, loading } = useAuth();
 
-//   return isAuthenticated ? children : <Navigate to="/login" replace />;
-// };
+  if (loading)
+    return (
+      <p
+        className="text-center items-center text-blue-700
+      justify-center "
+      >
+        Loading...
+      </p>
+    );
 
-// export default ProtectedRoute;
+  return user ? children : <Navigate to="/login" replace />;
+};
 
-// const ProtectedRoute = ({ children }) => {
-//   const getAuth = localStorage.getItem(auth);
-//   const isAuthenticated = JSON.parse(getAuth);
-//   return isAuthenticated ? <outlet /> : <Navigate to="/" replace={true} />;
-// };
-
-// export default ProtectedRoute;
+export default ProtectedRoute;

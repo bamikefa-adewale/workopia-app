@@ -62,7 +62,7 @@ export const getCurrentUser = async () => {
   } = await supabase.auth.getUser();
 
   if (error) {
-    return toast.error(error.message);
+    return toast.su(error.message);
   }
 
   return user;
